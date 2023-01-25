@@ -24,6 +24,7 @@ public class BlogPost {
     @NotNull
     private String title;
     @NotEmpty
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     public BlogPost() {
