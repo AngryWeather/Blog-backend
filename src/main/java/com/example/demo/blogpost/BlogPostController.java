@@ -26,7 +26,7 @@ public class BlogPostController {
     @CrossOrigin
     @ResponseBody
     @GetMapping("/posts")
-    public ArrayList<String> getBlogPosts(@AuthenticationPrincipal AppUser appUser) {
+    public ArrayList<BlogPostProjection> getBlogPosts(@AuthenticationPrincipal AppUser appUser) {
         return blogPostService.getBlogPosts(appUser);
     }
 

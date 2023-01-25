@@ -25,7 +25,7 @@ public class BlogPostService {
         blogPostRepository.save(blogPost);
     }
 
-    public ArrayList<String> getBlogPosts(AppUser appUser) {
+    public ArrayList<BlogPostProjection> getBlogPosts(AppUser appUser) {
         return blogPostRepository.findAllByAppUserId(appUser.getId());
     }
 }

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
-    @Query("SELECT b.title, b.content FROM BlogPost b WHERE b.appUser.id = ?1")
-    ArrayList<String> findAllByAppUserId(Long appUserId);
+    @Query("SELECT b.id as id, b.title as title, b.content as content FROM BlogPost b WHERE b.appUser.id = ?1")
+    ArrayList<BlogPostProjection> findAllByAppUserId(Long appUserId);
 }
