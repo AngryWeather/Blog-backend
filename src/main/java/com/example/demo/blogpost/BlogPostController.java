@@ -30,5 +30,10 @@ public class BlogPostController {
         return blogPostService.getBlogPosts(appUser);
     }
 
+    @ResponseBody
+    @GetMapping("/posts/all")
+    public ArrayList<BlogPostProjection> getAllBlogPosts() {
+        return blogPostService.getAllBlogPosts();
+    }
 
 }

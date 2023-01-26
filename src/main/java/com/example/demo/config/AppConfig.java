@@ -40,7 +40,7 @@ public class AppConfig {
                 .and()
                 .formLogin()
                 .permitAll()
-                .defaultSuccessUrl("http://localhost:3000/new-post", true);
+                .defaultSuccessUrl("http://localhost:3000/home", true);
 
         return http.build();
     }

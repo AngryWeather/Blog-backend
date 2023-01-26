@@ -28,4 +28,8 @@ public class BlogPostService {
     public ArrayList<BlogPostProjection> getBlogPosts(AppUser appUser) {
         return blogPostRepository.findAllByAppUserId(appUser.getId());
     }
+
+    public ArrayList<BlogPostProjection> getAllBlogPosts() {
+        return blogPostRepository.findAllBlogPosts();
+    }
 }
