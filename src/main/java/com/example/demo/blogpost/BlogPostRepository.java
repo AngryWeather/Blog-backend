@@ -15,4 +15,5 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
     @Query("SELECT b.id as id, b.title as title, b.content as content FROM BlogPost b")
     ArrayList<BlogPostProjection> findAllBlogPosts();
+
 }

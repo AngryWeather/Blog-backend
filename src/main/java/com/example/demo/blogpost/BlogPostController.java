@@ -23,6 +23,16 @@ public class BlogPostController {
         return "redirect:http://localhost:3000/post";
     }
 
+    @ResponseBody
+    @PostMapping("/api/new-post/add")
+    public void addPostApi (@AuthenticationPrincipal AppUser appUser, @RequestBody BlogPost blogPost) {
+        if (appUser != null) {
+            blogPostService.addPost(appUser, blogPost);
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
     @CrossOrigin
     @ResponseBody
     @GetMapping("/posts")
@@ -34,6 +44,19 @@ public class BlogPostController {
     @GetMapping("/posts/all")
     public ArrayList<BlogPostProjection> getAllBlogPosts() {
         return blogPostService.getAllBlogPosts();
+    }
+
+
+    @ResponseBody
+    @PutMapping("/posts/{id}")
+    public void updateBlogPostApi(@PathVariable("id") Long id, @RequestBody BlogPost blogPost) {
+        blogPostService.updateBlogPost(id, blogPost);
+    }
+
+    @ResponseBody
+    @DeleteMapping("/posts/{id}")
+    public void deleteBlogPostApi(@PathVariable("id") Long id) {
+        blogPostService.deleteBlogPost(id);
     }
 
 }

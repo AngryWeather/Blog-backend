@@ -18,4 +18,10 @@ public class RegistrationController {
         registrationService.register(appUser);
         return "redirect:/login";
     }
+
+    @ResponseBody
+    @PostMapping("/api/register")
+    public void registerUser(@RequestBody AppUser appUser) {
+        registrationService.register(appUser);
+    }
 }

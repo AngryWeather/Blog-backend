@@ -32,23 +32,23 @@ public class AppConfig {
         http
                 .cors().and()
                 .csrf().disable()
+                .httpBasic()
+                .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/new-post/**", "/posts")
+                .requestMatchers("/posts/all")
+                .permitAll()
+                .requestMatchers("/api/new-post/**","/new-post/**", "/posts",
+                        "/posts/*")
                 .authenticated()
                 .anyRequest()
-                .permitAll()
-                .and()
-                .formLogin()
-                .permitAll()
-                .defaultSuccessUrl("http://localhost:3000/home", true);
-
+                .permitAll();
         return http.build();
     }
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); //URLs you want to allow
-        configuration.setAllowedMethods(Arrays.asList("GET","POST")); //methods you want to allow
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE")); //methods you want to allow
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

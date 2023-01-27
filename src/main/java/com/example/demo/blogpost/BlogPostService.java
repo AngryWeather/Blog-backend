@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -31,5 +32,17 @@ public class BlogPostService {
 
     public ArrayList<BlogPostProjection> getAllBlogPosts() {
         return blogPostRepository.findAllBlogPosts();
+    }
+
+
+    public void updateBlogPost(Long id, BlogPost blogPost) {
+        Optional<BlogPost> currentBlogPost = blogPostRepository.findById(id);
+        currentBlogPost.get().setTitle(blogPost.getTitle());
+        currentBlogPost.get().setContent(blogPost.getContent());
+        blogPostRepository.save(currentBlogPost.get());
+    }
+
+    public void deleteBlogPost(Long id) {
+        blogPostRepository.deleteById(id);
     }
 }
