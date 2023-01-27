@@ -2,8 +2,10 @@ package com.example.demo.blogpost;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -47,7 +49,7 @@ public class BlogPostService {
             if ( blogPost.get().getAppUser().equals(appUser)) {
                 blogPostRepository.deleteById(id);
             } else {
-                throw new IllegalArgumentException();
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
             }
         }
     }
