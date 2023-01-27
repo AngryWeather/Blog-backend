@@ -1,6 +1,7 @@
 package com.example.demo.blogpost;
 
 import com.example.demo.appuser.AppUser;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -55,8 +56,8 @@ public class BlogPostController {
 
     @ResponseBody
     @DeleteMapping("/posts/{id}")
-    public void deleteBlogPostApi(@PathVariable("id") Long id) {
-        blogPostService.deleteBlogPost(id);
+    public void deleteBlogPostApi(@PathVariable("id") Long id, @AuthenticationPrincipal AppUser appUser) {
+        blogPostService.deleteBlogPost(id, appUser);
     }
 
 }

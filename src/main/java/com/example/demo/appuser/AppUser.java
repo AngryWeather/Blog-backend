@@ -61,20 +61,29 @@ public class AppUser implements UserDetails {
         return id;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        AppUser appUser = (AppUser) o;
+//        return Objects.equals(id, appUser.id) && Objects.equals(username, appUser.username)
+//                && Objects.equals(email, appUser.email) && Objects.equals(password, appUser.password)
+//                && appUserRole == appUser.appUserRole && Objects.equals(locked, appUser.locked)
+//                && Objects.equals(enabled, appUser.enabled);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return Objects.equals(id, appUser.id) && Objects.equals(username, appUser.username)
-                && Objects.equals(email, appUser.email) && Objects.equals(password, appUser.password)
-                && appUserRole == appUser.appUserRole && Objects.equals(locked, appUser.locked)
-                && Objects.equals(enabled, appUser.enabled);
+        return id.equals(appUser.id) && username.equals(appUser.username) && email.equals(appUser.email) && password.equals(appUser.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password, appUserRole, locked, enabled);
+        return Objects.hash(id, username, email, password);
     }
 
     public void addBlogPost(BlogPost blogPost) {

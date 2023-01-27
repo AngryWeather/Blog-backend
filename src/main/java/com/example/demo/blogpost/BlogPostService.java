@@ -4,7 +4,6 @@ import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -42,7 +41,14 @@ public class BlogPostService {
         blogPostRepository.save(currentBlogPost.get());
     }
 
-    public void deleteBlogPost(Long id) {
-        blogPostRepository.deleteById(id);
+    public void deleteBlogPost(Long id, AppUser appUser) {
+        if (blogPostRepository.existsById(id)) {
+            Optional<BlogPost> blogPost = blogPostRepository.findById(id);
+            if ( blogPost.get().getAppUser().equals(appUser)) {
+                blogPostRepository.deleteById(id);
+            } else {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 }
