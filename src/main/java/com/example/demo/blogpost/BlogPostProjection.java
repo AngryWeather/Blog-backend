@@ -4,4 +4,5 @@ public interface BlogPostProjection {
     Long getId();
     String getTitle();
     String getContent();
+    String getAuthor();
 }

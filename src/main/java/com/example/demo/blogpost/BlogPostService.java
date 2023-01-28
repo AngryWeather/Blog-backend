@@ -36,11 +36,16 @@ public class BlogPostService {
     }
 
 
-    public void updateBlogPost(Long id, BlogPost blogPost) {
-        Optional<BlogPost> currentBlogPost = blogPostRepository.findById(id);
-        currentBlogPost.get().setTitle(blogPost.getTitle());
-        currentBlogPost.get().setContent(blogPost.getContent());
-        blogPostRepository.save(currentBlogPost.get());
+    public void updateBlogPost(Long id, BlogPost blogPost, AppUser appUser) {
+        if (blogPostRepository.existsById(id)) {
+            Optional<BlogPost> currentBlogPost = blogPostRepository.findById(id);
+            if (currentBlogPost.get().getAppUser().equals(appUser)) {
+                currentBlogPost.get().setTitle(blogPost.getTitle());
+                currentBlogPost.get().setContent(blogPost.getContent());
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+        }
     }
 
     public void deleteBlogPost(Long id, AppUser appUser) {

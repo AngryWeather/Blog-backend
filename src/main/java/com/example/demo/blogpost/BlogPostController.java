@@ -50,8 +50,9 @@ public class BlogPostController {
 
     @ResponseBody
     @PutMapping("/posts/{id}")
-    public void updateBlogPostApi(@PathVariable("id") Long id, @RequestBody BlogPost blogPost) {
-        blogPostService.updateBlogPost(id, blogPost);
+    public void updateBlogPostApi(@PathVariable("id") Long id, @RequestBody BlogPost blogPost,
+                                  @AuthenticationPrincipal AppUser appUser) {
+        blogPostService.updateBlogPost(id, blogPost, appUser);
     }
 
     @ResponseBody

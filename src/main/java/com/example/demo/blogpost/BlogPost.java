@@ -2,6 +2,7 @@ package com.example.demo.blogpost;
 
 import com.example.demo.appuser.AppUser;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -39,6 +40,10 @@ public class BlogPost {
         this.appUser = appUser;
         this.title = title;
         this.content = content;
+    }
+
+    public String getAuthor() {
+        return appUser.getUsername();
     }
 
     public AppUser getAppUser() {
